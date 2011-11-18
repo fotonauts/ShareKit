@@ -35,7 +35,7 @@
 
 @implementation SHKActionSheet
 
-@synthesize item, sharers, shareDelegate;
+@synthesize item, sharers, itemsBySharerIds, shareDelegate;
 
 - (void)dealloc
 {
@@ -47,21 +47,28 @@
 
 + (SHKActionSheet *)actionSheetForType:(SHKShareType)type
 {
+	SHKActionSheet *as = [self actionSheetForSharedIds:[SHK favoriteSharersForType:type]];
+	
+	as.item = [[[SHKItem alloc] init] autorelease];
+	as.item.shareType = type;
+	
+	return as;
+}
+
++ (SHKActionSheet *)actionSheetForSharedIds:(NSArray*)sharerIds
+{
 	SHKActionSheet *as = [[SHKActionSheet alloc] initWithTitle:SHKLocalizedString(@"Share")
 													  delegate:nil
 											 cancelButtonTitle:nil
 										destructiveButtonTitle:nil
 											 otherButtonTitles:nil];
 	as.delegate = as;
-	as.item = [[[SHKItem alloc] init] autorelease];
-	as.item.shareType = type;
 	
-	as.sharers = [NSMutableArray arrayWithCapacity:0];
-	NSArray *favoriteSharers = [SHK favoriteSharersForType:type];
+	as.sharers = [NSMutableArray arrayWithCapacity:[sharerIds count]];
 		
 	// Add buttons for each favorite sharer
 	id class;
-	for(NSString *sharerId in favoriteSharers)
+	for(NSString *sharerId in sharerIds)
 	{
 		class = NSClassFromString(sharerId);
 		if ([class canShare])
@@ -88,6 +95,13 @@
 	return as;
 }
 
++ (SHKActionSheet *)actionSheetForItems:(NSDictionary*)items
+{
+	SHKActionSheet *as = [self actionSheetForSharedIds:[items allKeys]];
+	as.itemsBySharerIds = items;
+	return as;
+}
+
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
 {
 	// Sharers
@@ -95,10 +109,16 @@
 	{
 		bool doShare = YES;
 		SHKSharer* sharer = [[[NSClassFromString([sharers objectAtIndex:buttonIndex]) alloc] init] autorelease];
-		[sharer loadItem:item];
+		SHKItem *itemToShare;
+		
+		itemToShare = [itemsBySharerIds objectForKey:NSStringFromClass([sharer class])];
+		if (!itemToShare) { 
+			itemToShare = item;
+		}
+		[sharer loadItem:itemToShare];
 		if (shareDelegate != nil && [shareDelegate respondsToSelector:@selector(aboutToShareItem:withSharer:)])
 		{
-			doShare = [shareDelegate aboutToShareItem:item withSharer:sharer];
+			doShare = [shareDelegate aboutToShareItem:itemToShare withSharer:sharer];
 		}
 		if(doShare)
 			[sharer share];

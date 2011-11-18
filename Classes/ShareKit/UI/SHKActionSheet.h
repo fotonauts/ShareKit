@@ -35,13 +35,17 @@
 	NSMutableArray *sharers;
 	SHKItem *item;
 	id<SHKShareItemDelegate> shareDelegate;
+	NSDictionary *itemsBySharerIds;
 }
 
 @property (retain) NSMutableArray *sharers;
 @property (retain) SHKItem *item;
+@property (retain) NSDictionary *itemsBySharerIds;
 @property (retain) id<SHKShareItemDelegate> shareDelegate;
 
++ (SHKActionSheet *)actionSheetForSharedIds:(NSArray*)sharerIds;
 + (SHKActionSheet *)actionSheetForType:(SHKShareType)type;
 + (SHKActionSheet *)actionSheetForItem:(SHKItem *)i;
++ (SHKActionSheet *)actionSheetForItems:(NSDictionary*)items;
 
 @end
