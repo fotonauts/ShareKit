@@ -26,164 +26,160 @@
 //
 
 #import "DefaultSHKConfigurationDelegate.h"
-
+#import "SHKConfig.h"
 
 @implementation DefaultSHKConfigurationDelegate
 
 - (NSString*)appName {
-	return @"My App Name";
+	return SHKMyAppName;
 }
 
 - (NSString*)appURL {
-	return @"http://example.com";
+	return SHKMyAppURL;
 }
 
 - (NSString*)deliciousConsumerKey {
-	return @"";
+	return SHKDeliciousConsumerKey;
 }
 
 - (NSString*)deliciousSecretKey {
-	return @"";
+	return SHKDeliciousSecretKey;
 }
 
 - (NSString*)facebookAppId {
-	return @"";
-}
-
-- (NSString*)facebookLocalAppId {
-	return @"";
+	return SHKFacebookAppID;
 }
 
 - (NSString*)readItLaterKey {
-	return @"";
+	return SHKReadItLaterKey;
 }
 
 - (NSString*)twitterConsumerKey {
-	return @"";
+	return SHKTwitterConsumerKey;
 }
 
 - (NSString*)twitterSecret {
-	return @"";
+	return SHKTwitterSecret;
 }
 
 - (NSString*)twitterCallbackUrl {
-	return @"";
+	return SHKTwitterCallbackUrl;
 }
 
 - (NSNumber*)twitterUseXAuth {
-	return [NSNumber numberWithInt:0];
+	return [NSNumber numberWithInt:SHKTwitterUseXAuth];
 }
 
 - (NSString*)twitterUsername {
-	return @"";
+	return SHKTwitterUsername;
 }
 
 - (NSString*)evernoteUserStoreURL {
-	return @"";
+	return SHKEvernoteUserStoreURL;
 }
 
 - (NSString*)evernoteNetStoreURLBase {
-	return @"";
+	return SHKEvernoteNetStoreURLBase;
 }
 
 - (NSString*)evernoteConsumerKey {
-	return @"";
+	return SHKEvernoteConsumerKey;
 }
 
 - (NSString*)evernoteSecret {
-	return @"";
+	return SHKEvernoteSecretKey;
 }
 
 - (NSString*)bitLyLogin {
-	return @"";
+	return SHKBitLyLogin;
 }
 
 - (NSString*)bitLyKey {
-	return @"";
+	return SHKBitLyKey;
 }
 
 - (NSNumber*)shareMenuAlphabeticalOrder {
-	return [NSNumber numberWithInt:0];
+	return [NSNumber numberWithInt:SHKShareMenuAlphabeticalOrder];
 }
 
 - (NSNumber*)sharedWithSignature {
-	return [NSNumber numberWithInt:0];
+	return [NSNumber numberWithInt:SHKSharedWithSignature];
 }
 
 - (NSString*)barStyle {
-	return @"UIBarStyleDefault";
+	return SHKBarStyle;
 }
 
 - (NSNumber*)barTintColorRed {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKBarTintColorRed];
 }
 
 - (NSNumber*)barTintColorGreen {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKBarTintColorGreen];
 }
 
 - (NSNumber*)barTintColorBlue {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKBarTintColorBlue];
 }
 
 - (NSNumber*)formFontColorRed {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormFontColorRed];
 }
 
 - (NSNumber*)formFontColorGreen {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormFontColorGreen];
 }
 
 - (NSNumber*)formFontColorBlue {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormFontColorBlue];
 }
 
 - (NSNumber*)formBgColorRed {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormBgColorRed];
 }
 
 - (NSNumber*)formBgColorGreen {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormBgColorGreen];
 }
 
 - (NSNumber*)formBgColorBlue {
-	return [NSNumber numberWithInt:-1];
+	return [NSNumber numberWithInt:SHKFormBgColorBlue];
 }
 
 - (NSString*)modalPresentationStyle {
-	return @"UIModalPresentationFormSheet";
+	return SHKModalPresentationStyle;
 }
 
 - (NSString*)modalTransitionStyle {
-	return @"UIModalTransitionStyleCoverVertical";
+	return SHKModalTransitionStyle;
 }
 
 - (NSNumber*)maxFavCount {
-	return [NSNumber numberWithInt:3];
+	return [NSNumber numberWithInt:SHK_MAX_FAV_COUNT];
 }
 
 - (NSString*)favsPrefixKey {
-	return @"SHK_FAVS_";
+	return SHK_FAVS_PREFIX_KEY;
 }
 
 - (NSString*)authPrefix {
-	return @"SHK_AUTH_";
+	return SHK_AUTH_PREFIX;
 }
 
 - (NSString*)sharersPlistName {
-	return @"SHKSharers.plist";
+	return SHKSSharersPlistName;
 }
 
 - (NSNumber*)allowOffline {
-	return [NSNumber numberWithBool:true];
+	return [NSNumber numberWithBool:SHK_ALLOW_OFFLINE?YES:NO];
 }
 
 - (NSNumber*)allowAutoShare {
-	return [NSNumber numberWithBool:true];
+	return [NSNumber numberWithBool:SHK_ALLOW_AUTOSHARE?YES:NO];
 }
 
 - (NSNumber*)usePlaceholders {
-	return [NSNumber numberWithBool:false];
+	return [NSNumber numberWithBool:SHKUsePlaceholders?YES:NO];
 }
 
 @end

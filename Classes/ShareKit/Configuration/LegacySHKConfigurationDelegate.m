@@ -39,7 +39,6 @@
 						 SHKDeliciousConsumerKey, @"deliciousConsumerKey", 
 						 SHKDeliciousSecretKey, @"deliciousSecretKey", 
 						 SHKFacebookAppID, @"facebookAppId",
-						 SHKFacebookLocalAppID, @"facebookLocalAppId",
 						 SHKReadItLaterKey, @"readItLaterKey", 
 						 SHKTwitterConsumerKey, @"twitterConsumerKey", 
 						 SHKTwitterSecret, @"twitterSecret", 
