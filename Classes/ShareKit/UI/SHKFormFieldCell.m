@@ -157,6 +157,11 @@
 		case SHKFormFieldTypeSwitch:
 			return toggle.on ? SHKFormFieldSwitchOn : SHKFormFieldSwitchOff;
 			break;
+      
+    case SHKFormFieldTypeText:
+    case SHKFormFieldTypeTextNoCorrect:
+    case SHKFormFieldTypePassword:
+      break;
 	}
 	
 	return textField.text;
