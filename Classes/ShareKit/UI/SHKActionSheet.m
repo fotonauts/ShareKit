@@ -34,6 +34,8 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
+static BOOL moreButton = NO;
+
 @implementation SHKActionSheet
 
 @synthesize item, sharers, itemsBySharerIds, shareDelegate;
@@ -79,8 +81,10 @@
 		}
 	}
 	
-	// Add More button
-	[as addButtonWithTitle:SHKLocalizedString(@"More...")];
+	if (moreButton) {
+		// Add More button
+		[as addButtonWithTitle:SHKLocalizedString(@"More...")];
+	}
 	
 	// Add Cancel button
 	[as addButtonWithTitle:SHKLocalizedString(@"Cancel")];
@@ -108,7 +112,7 @@
     NSInteger numberOfSharers = (NSInteger) [sharers count];
 
 	// Sharers
-	if (buttonIndex >= 0 && buttonIndex < numberOfSharers)
+	if (buttonIndex >= 0 && ((buttonIndex < numberOfSharers && moreButton) || (buttonIndex <= numberOfSharers)))
 	{
 		bool doShare = YES;
 		SHKSharer* sharer = [[[NSClassFromString([sharers objectAtIndex:buttonIndex]) alloc] init] autorelease];
