@@ -49,7 +49,6 @@
 - (NSString*)deliciousConsumerKey;
 - (NSString*)deliciousSecretKey;
 - (NSString*)facebookAppId;
-- (NSString*)facebookLocalAppId;
 - (NSString*)readItLaterKey;
 - (NSString*)twitterConsumerKey;
 - (NSString*)twitterSecret;

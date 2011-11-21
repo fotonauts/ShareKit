@@ -44,6 +44,33 @@ static NSString *const kSHKFacebookExpiryDateKey=@"kSHKFacebookExpiryDate";
 
 @implementation SHKFacebook
 
++ (NSString *)facebookLocalAppId
+{
+	static NSString *facebookLocalAppId = nil;
+	
+	if (!facebookLocalAppId) {
+		NSString *facebookSchemePrefix;
+		NSString *facebookURLScheme = nil;
+		
+		NSAssert([SHKCONFIG(facebookAppId) length] > 0, @"need to have a facebook id");
+		facebookSchemePrefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
+		for (NSDictionary *urls in [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleURLTypes"]) {
+			for (NSString *urlScheme in [urls objectForKey:@"CFBundleURLSchemes"]) {
+				if ([urlScheme hasPrefix:facebookSchemePrefix]) {
+					facebookURLScheme = urlScheme;
+					break;
+				}
+			}
+			if (facebookURLScheme) {
+				break;
+			}
+		}
+		NSAssert([facebookURLScheme length] > 0, @"you need to set a scheme URL like %@ or starting with %@ in the plist application", facebookSchemePrefix, facebookSchemePrefix);
+		facebookLocalAppId = [facebookURLScheme substringFromIndex:[facebookSchemePrefix length]];
+	}
+	return facebookLocalAppId;
+}
+
 - (void)dealloc
 {
 	[super dealloc];
@@ -54,7 +81,7 @@ static NSString *const kSHKFacebookExpiryDateKey=@"kSHKFacebookExpiryDate";
   static Facebook *facebook=nil;
   @synchronized([SHKFacebook class]) {
     if (! facebook)
-      facebook = [[Facebook alloc] initWithAppId:SHKCONFIG(facebookAppId) urlSchemeSuffix:SHKCONFIG(facebookLocalAppId) andDelegate:nil];
+      facebook = [[Facebook alloc] initWithAppId:SHKCONFIG(facebookAppId) urlSchemeSuffix:[self facebookLocalAppId] andDelegate:nil];
   }
   return facebook;
 }
