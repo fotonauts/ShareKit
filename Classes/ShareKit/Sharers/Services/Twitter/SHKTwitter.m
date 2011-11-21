@@ -325,7 +325,7 @@
 		if ([result isEqualToString:@"ALREADY_A_BITLY_LINK"])
 			result = [item.URL.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		
-		[item setCustomValue:[NSString stringWithFormat:@"%@ %@", item.text ? item.text : item.title, result] forKey:@"status"];
+		[item setCustomValue:[NSString stringWithFormat:item.text ? item.text : item.title, result] forKey:@"status"];
 	}
 	
 	[super share];
