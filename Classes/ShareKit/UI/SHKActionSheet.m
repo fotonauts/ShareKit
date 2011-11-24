@@ -112,7 +112,7 @@ static BOOL moreButton = NO;
     NSInteger numberOfSharers = (NSInteger) [sharers count];
 
 	// Sharers
-	if (buttonIndex >= 0 && ((buttonIndex < numberOfSharers && moreButton) || (buttonIndex <= numberOfSharers)))
+	if (buttonIndex >= 0 && buttonIndex < numberOfSharers)
 	{
 		bool doShare = YES;
 		SHKSharer* sharer = [[[NSClassFromString([sharers objectAtIndex:buttonIndex]) alloc] init] autorelease];
@@ -132,7 +132,7 @@ static BOOL moreButton = NO;
 	}
 	
 	// More
-	else if (buttonIndex == numberOfSharers)
+	else if (moreButton && buttonIndex == numberOfSharers)
 	{
 		SHKShareMenu *shareMenu = [[SHKCustomShareMenu alloc] initWithStyle:UITableViewStyleGrouped];
 		shareMenu.shareDelegate = shareDelegate;
